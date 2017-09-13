@@ -25,8 +25,10 @@ func printAlbums (a *Artist) {
 	fmt.Printf("%s has the following %+v albums.\n", a.name, a.albums)
 }
 
-func releaseAlbum (a *Artist, alb album) []album{
-	a.albums = append(a.albums, alb)
+func releaseAlbum (a *Artist, alb ...album) []album{
+	for _, v := range alb {
+		a.albums = append(a.albums, v)
+	}
 	return a.albums
 }
 
@@ -43,10 +45,12 @@ func main() {
 
 			alb := album{songs: 14, name: "Happy Days Vol II", year: 2020}
 			alb2 := album{songs: 14, name: "Happy Days Vol III", year: 2021}
+			alb3 := album{songs: 14, name: "Happy Days Vol IV", year: 2021}
+
 	printName(&singer)
 	changeName(&singer, "Jim")
 	releaseAlbum(&singer, alb)
-	releaseAlbum(&singer, alb2)
+	releaseAlbum(&singer, alb2, alb3)
 	printName(&singer)
 	printAlbums(&singer)
 	printAlbumCount(&singer)
